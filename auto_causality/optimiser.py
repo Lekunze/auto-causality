@@ -374,8 +374,9 @@ class AutoCausality:
             estimate = self.causal_model.estimate_effect(
                 self.identified_estimand,
                 method_name=self.estimator_name,
-                control_value=0,
-                treatment_value=1,
+                control_value=[0],
+                treatment_value=[1, 2, 3],
+                # treatment_value=1,
                 target_units="ate",  # condition used for CATE
                 confidence_intervals=False,
                 method_params={
@@ -383,7 +384,9 @@ class AutoCausality:
                     "fit_params": {},
                 },
             )
+            print("Estimated...")
             scores = self._compute_metrics(estimate)
+            print("Computed scores...")
 
             return {
                 self.metric: scores["validation"][self.metric],
@@ -394,7 +397,10 @@ class AutoCausality:
             }
         except Exception as e:
             print("Evaluation failed!\n", config)
+            print("Reason")
             print(e)
+            print()
+            print()
             return {
                 self.metric: -np.inf,
                 "exception": e,

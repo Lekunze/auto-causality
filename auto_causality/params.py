@@ -333,7 +333,7 @@ class SimpleParamService:
                     "model_y": outcome_model,
                     # "max_depth": self.max_depth,
                     # "n_estimators": self.n_estimators,
-                    "discrete_treatment": True,
+                    "discrete_treatment": False,
                     "inference": False,
                     "mc_iters": None,
                     "max_depth": None,
